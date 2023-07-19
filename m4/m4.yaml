@@ -1,0 +1,377 @@
+info:
+  description: Show polling and paging generation
+  title: Polling Paging Example
+schemas:
+  numbers:
+    - &ref_1
+      type: integer
+      apiVersions:
+        - version: 1.0.0
+      precision: 32
+      language:
+        default:
+          name: ProductPropertiesId
+          description: ''
+      protocol: {}
+    - &ref_4
+      type: integer
+      apiVersions:
+        - version: 1.0.0
+      precision: 32
+      language:
+        default:
+          name: ErrorStatus
+          description: ''
+      protocol: {}
+    - &ref_8
+      type: integer
+      apiVersions:
+        - version: 1.0.0
+      precision: 32
+      language:
+        default:
+          name: FinalProductPropertiesId
+          description: ''
+      protocol: {}
+  strings:
+    - &ref_0
+      type: string
+      language:
+        default:
+          name: String
+          description: simple string
+      protocol: {}
+    - &ref_2
+      type: string
+      apiVersions:
+        - version: 1.0.0
+      language:
+        default:
+          name: ProductPropertiesName
+          description: ''
+      protocol: {}
+    - &ref_5
+      type: string
+      apiVersions:
+        - version: 1.0.0
+      language:
+        default:
+          name: ErrorMessage
+          description: ''
+      protocol: {}
+    - &ref_7
+      type: string
+      apiVersions:
+        - version: 1.0.0
+      language:
+        default:
+          name: ProductResultNextLink
+          description: ''
+      protocol: {}
+    - &ref_9
+      type: string
+      apiVersions:
+        - version: 1.0.0
+      language:
+        default:
+          name: FinalProductPropertiesName
+          description: ''
+      protocol: {}
+  constants:
+    - &ref_13
+      type: constant
+      value:
+        value: application/json
+      valueType: *ref_0
+      language:
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: {}
+  objects:
+    - &ref_6
+      type: object
+      apiVersions:
+        - version: 1.0.0
+      properties:
+        - schema: &ref_3
+            type: object
+            apiVersions:
+              - version: 1.0.0
+            properties:
+              - schema: *ref_1
+                serializedName: id
+                language:
+                  default:
+                    name: id
+                    description: ''
+                protocol: {}
+              - schema: *ref_2
+                serializedName: name
+                language:
+                  default:
+                    name: name
+                    description: ''
+                protocol: {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language:
+              default:
+                name: ProductProperties
+                description: ''
+                namespace: ''
+            protocol: {}
+          serializedName: properties
+          language:
+            default:
+              name: properties
+              description: ''
+          protocol: {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language:
+        default:
+          name: Product
+          description: ''
+          namespace: ''
+      protocol: {}
+    - *ref_3
+    - &ref_16
+      type: object
+      apiVersions:
+        - version: 1.0.0
+      properties:
+        - schema: *ref_4
+          serializedName: status
+          language:
+            default:
+              name: status
+              description: ''
+          protocol: {}
+        - schema: *ref_5
+          serializedName: message
+          language:
+            default:
+              name: message
+              description: ''
+          protocol: {}
+      serializationFormats:
+        - json
+      usage:
+        - exception
+      language:
+        default:
+          name: Error
+          description: ''
+          namespace: ''
+      protocol: {}
+    - type: object
+      apiVersions:
+        - version: 1.0.0
+      properties:
+        - schema: &ref_11
+            type: array
+            apiVersions:
+              - version: 1.0.0
+            elementType: *ref_6
+            language:
+              default:
+                name: ProductResultValue
+                description: Array of Product
+            protocol: {}
+          serializedName: value
+          language:
+            default:
+              name: value
+              description: ''
+          protocol: {}
+        - schema: *ref_7
+          serializedName: nextLink
+          language:
+            default:
+              name: nextLink
+              description: ''
+          protocol: {}
+      language:
+        default:
+          name: ProductResult
+          description: ''
+          namespace: ''
+      protocol: {}
+    - type: object
+      apiVersions:
+        - version: 1.0.0
+      properties:
+        - schema: &ref_10
+            type: object
+            apiVersions:
+              - version: 1.0.0
+            properties:
+              - schema: *ref_8
+                serializedName: id
+                language:
+                  default:
+                    name: id
+                    description: ''
+                protocol: {}
+              - schema: *ref_9
+                serializedName: name
+                language:
+                  default:
+                    name: name
+                    description: ''
+                protocol: {}
+            language:
+              default:
+                name: FinalProductProperties
+                description: ''
+                namespace: ''
+            protocol: {}
+          serializedName: properties
+          language:
+            default:
+              name: properties
+              description: ''
+          protocol: {}
+      language:
+        default:
+          name: FinalProduct
+          description: ''
+          namespace: ''
+      protocol: {}
+    - *ref_10
+  arrays:
+    - *ref_11
+globalParameters:
+  - &ref_12
+    schema: *ref_0
+    clientDefaultValue: http://localhost:3000
+    implementation: Client
+    origin: modelerfour:synthesized/host
+    required: true
+    extensions:
+      x-ms-skip-url-encoding: true
+    language:
+      default:
+        name: $host
+        description: server parameter
+        serializedName: $host
+    protocol:
+      http:
+        in: uri
+operationGroups:
+  - $key: ''
+    operations:
+      - operationId: basicPolling
+        apiVersions:
+          - version: 1.0.0
+        parameters:
+          - *ref_12
+        requestMediaTypes:
+          application/json: &ref_15
+            parameters:
+              - &ref_14
+                schema: *ref_6
+                implementation: Method
+                required: false
+                language:
+                  default:
+                    name: product
+                    description: Product to put
+                protocol:
+                  http:
+                    in: body
+                    style: json
+              - schema: *ref_13
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language:
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol:
+                  http:
+                    in: header
+            signatureParameters:
+              - *ref_14
+            language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /basic/polling
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_15
+        signatureParameters: []
+        responses:
+          - schema: *ref_6
+            language:
+              default:
+                name: ''
+                description: Initial response
+            protocol:
+              http:
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - language:
+              default:
+                name: ''
+                description: Final response
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+        exceptions:
+          - schema: *ref_16
+            language:
+              default:
+                name: ''
+                description: Unexpected error
+            protocol:
+              http:
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+          x-ms-long-running-operation-options:
+            final-state-schema: '#/components/schemas/schemas:10'
+            final-state-via: location
+        language:
+          default:
+            name: BasicPolling
+            description: A simple polling operation.
+        protocol: {}
+    language:
+      default:
+        name: ''
+        description: ''
+    protocol: {}
+security:
+  authenticationRequired: false
+  schemes: []
+language:
+  default:
+    name: PollingPagingExample
+    description: ''
+protocol:
+  http: {}
